@@ -10,6 +10,7 @@ namespace learn_hr.Data
     {
         public string EmpNo { get; set; }
         public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string TaxId { get; set; }
         public string EmpDeptCode { get; set; }
         public string EmpGradeCode { get; set; }

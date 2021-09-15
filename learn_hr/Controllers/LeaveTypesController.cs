@@ -2,6 +2,7 @@
 using learn_hr.Contracts;
 using learn_hr.Data;
 using learn_hr.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace learn_hr.Controllers
 {
+    [Authorize]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _repo;
@@ -41,12 +43,14 @@ namespace learn_hr.Controllers
         }
 
         // GET: LeaveTypeController/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: LeaveTypeController/Create
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(LeaveTypeVM model)
@@ -75,6 +79,7 @@ namespace learn_hr.Controllers
         }
 
         // GET: LeaveTypeController/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             if (!_repo.isExist(id))
@@ -87,6 +92,7 @@ namespace learn_hr.Controllers
         }
 
         // POST: LeaveTypeController/Edit/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(LeaveTypeVM model)
@@ -114,6 +120,7 @@ namespace learn_hr.Controllers
         }
 
         // GET: LeaveTypeController/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             if (!_repo.isExist(id))
@@ -130,6 +137,7 @@ namespace learn_hr.Controllers
         }
 
         // POST: LeaveTypeController/Delete/5
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, LeaveTypeVM model)
