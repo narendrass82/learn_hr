@@ -7,12 +7,13 @@ namespace learn_hr.Models
 {
     public class EmployeeVM
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string EmpNo { get; set; }
         public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string TaxId { get; set; }
         public string EmpDeptCode { get; set; }
         public string EmpGradeCode { get; set; }

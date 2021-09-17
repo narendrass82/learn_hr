@@ -18,6 +18,8 @@ namespace learn_hr.Data
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<LeaveHistory> LeaveHistories { get; set; }        
+        public DbSet<learn_hr.Models.LeaveTypeVM> LeaveTypeVM { get; set; }
+        public DbSet<learn_hr.Models.EmployeeVM> EmployeeVM { get; set; }
         
 
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using learn_hr.Data;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace learn_hr
 {
     public static class SeedData
     {
-        public static void Seed(UserManager<IdentityUser> userManager,
+        public static void Seed(UserManager<Employee> userManager,
             RoleManager<IdentityRole> roleManager)
         {
             SeedRoles(roleManager);
@@ -16,11 +17,11 @@ namespace learn_hr
 
         }
 
-        public static void SeedUsers(UserManager<IdentityUser> userManager)
+        public static void SeedUsers(UserManager<Employee> userManager)
         {
             if (userManager.FindByEmailAsync("admin@localhost").Result==null)
             {
-                var user = new IdentityUser
+                var user = new Employee
                 {
                     UserName= "admin@localhost",
                     Email= "admin@localhost",

@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 namespace learn_hr.Controllers
 {
     [Authorize]
-    public class LeaveTypesController : Controller
+    public class LeaveTypeController : Controller
     {
         private readonly ILeaveTypeRepository _repo;
         private readonly IMapper _mapper;
-        public LeaveTypesController(ILeaveTypeRepository repo, IMapper mapper)
+        public LeaveTypeController(ILeaveTypeRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
