@@ -14,8 +14,9 @@ namespace learn_hr.Mappings
         {
             CreateMap<LeaveType, LeaveTypeVM>().ReverseMap();            
             CreateMap<LeaveAllocation, LeaveAllocationVM>().ReverseMap();
-            CreateMap<LeaveHistory, LeaveHistoryVM>().ReverseMap();
+            CreateMap<LeaveAllocation, EditLeaveAllocationVM>().ReverseMap();            
             CreateMap<Employee, EmployeeVM>().ReverseMap();
+            CreateMap<LeaveRequest, LeaveRequestVM>().ReverseMap();
         }
     }
 }

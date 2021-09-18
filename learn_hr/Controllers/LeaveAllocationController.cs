@@ -71,9 +71,17 @@ namespace learn_hr.Controllers
         }
 
         // GET: LeaveAllocationController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var employee = _mapper.Map<EmployeeVM>(_userManager.FindByIdAsync(id).Result);            
+            var allocation = _mapper.Map<List<LeaveAllocationVM>> (_leaveallocationrepo.GetLEaveAllocationsByEmployee(id));
+            var model = new ViewAllocationVM
+            {
+                Employee=employee,
+                EmployeeId=null,
+                LeaveAllocation=allocation
+            };
+            return View(model);
         }
 
         // GET: LeaveAllocationController/Create
@@ -100,21 +108,35 @@ namespace learn_hr.Controllers
         // GET: LeaveAllocationController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var leaveallocation = _leaveallocationrepo.FindById(id);
+            var model = _mapper.Map<EditLeaveAllocationVM>(leaveallocation);
+            return View(model);
         }
 
         // POST: LeaveAllocationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EditLeaveAllocationVM model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var record = _leaveallocationrepo.FindById(model.Id);
+                record.NumberOfDays = model.NumberOfDays;
+                var isSuccess = _leaveallocationrepo.Update(record);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Something went wrong");
+                    return View(model);
+                }
+                return RedirectToAction(nameof(Details), new { id=model.EmployeeId});
             }
             catch
             {
-                return View();
+                return View(model);
             }
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace learn_hr.Contracts
 {
-    public interface ILeaveHistoryRepository : IRepositoryBase<LeaveHistory>
+    public interface ILeaveHistoryRepository : IRepositoryBase<LeaveRequest>
     {
     }
 }
