@@ -43,12 +43,19 @@ namespace learn_hr.Repository
             return _db.LeaveAllocations.Include(q => q.LeaveType).Include(q => q.Employee).FirstOrDefault(q=>q.Id==id);
         }
 
-        public ICollection<LeaveAllocation> GetLEaveAllocationsByEmployee(string id)
+        public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id)
         {
             var period = DateTime.Now.Year;
             return FindAll()
                 .Where(q => q.EmployeeId == id && q.Period==period)
                 .ToList();
+        }
+
+        public LeaveAllocation GetLeaveAllocationsByEmployeeAndType(string id, int LeaveTypeId)
+        {
+            var period = DateTime.Now.Year;
+            return FindAll()
+                .FirstOrDefault(q => q.EmployeeId == id && q.Period == period && q.LeaveTypeId == LeaveTypeId);
         }
 
         public bool isExist(int id)

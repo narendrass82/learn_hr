@@ -9,6 +9,7 @@ namespace learn_hr.Contracts
     public interface ILeaveAllocationRepository : IRepositoryBase<LeaveAllocation>
     {
         bool CheckAllocation(int leaveTypeId,string employeeId);
-        ICollection<LeaveAllocation> GetLEaveAllocationsByEmployee(string id);
+        ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string employeId);
+        LeaveAllocation GetLeaveAllocationsByEmployeeAndType(string employeId,int LeaveTypeId);
     }
 }

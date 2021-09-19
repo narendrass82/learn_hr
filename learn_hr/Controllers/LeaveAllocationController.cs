@@ -74,7 +74,7 @@ namespace learn_hr.Controllers
         public ActionResult Details(string id)
         {
             var employee = _mapper.Map<EmployeeVM>(_userManager.FindByIdAsync(id).Result);            
-            var allocation = _mapper.Map<List<LeaveAllocationVM>> (_leaveallocationrepo.GetLEaveAllocationsByEmployee(id));
+            var allocation = _mapper.Map<List<LeaveAllocationVM>> (_leaveallocationrepo.GetLeaveAllocationsByEmployee(id));
             var model = new ViewAllocationVM
             {
                 Employee=employee,

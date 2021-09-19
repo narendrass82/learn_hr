@@ -1,5 +1,6 @@
 ﻿using learn_hr.Contracts;
 using learn_hr.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace learn_hr.Repository
 {
-    public class LeaveHistoryRepository : ILeaveHistoryRepository
+    public class LeaveRequestRepository : ILeaveRequestRepository
     {
         private readonly ApplicationDbContext _db;
-        public LeaveHistoryRepository(ApplicationDbContext db)
+        public LeaveRequestRepository(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -28,12 +29,27 @@ namespace learn_hr.Repository
 
         public ICollection<LeaveRequest> FindAll()
         {
-            return _db.LeaveRequests.ToList();
+            return _db.LeaveRequests
+                .Include(q=>q.RequestingEmployee)
+                .Include(q=>q.ApprovedBy)
+                .Include(q=>q.LeaveType)
+                .ToList();
         }
 
         public LeaveRequest FindById(int id)
         {
-            return _db.LeaveRequests.Find(id);
+            return _db.LeaveRequests
+                .Include(q => q.RequestingEmployee)
+                .Include(q => q.ApprovedBy)
+                .Include(q => q.LeaveType)
+                .FirstOrDefault(q=>q.Id==id);
+        }
+
+        public ICollection<LeaveRequest> GetLeaveRequestsByEmployee(string employeeId)
+        {
+            return FindAll()
+                .Where(q => q.RequestingEmployeeId == employeeId)
+                .ToList();
         }
 
         public bool isExist(int id)

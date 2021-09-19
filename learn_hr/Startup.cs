@@ -36,7 +36,7 @@ namespace learn_hr
             //add references for repository and contracts
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
-            services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
 
             //mapping auto mapper
             services.AddAutoMapper(typeof(AutoMapperInitilization));
